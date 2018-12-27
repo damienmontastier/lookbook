@@ -34,7 +34,7 @@ export default {
     })
   },
   mounted() {
-    // console.log(this.data);
+    console.log(this.datapp);
   },
   methods: {
     // next() {
