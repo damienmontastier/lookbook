@@ -1,4 +1,6 @@
-<template></template>
+<template>
+  <h1>coucou one image</h1>
+</template>
 
 <script>
 export default {

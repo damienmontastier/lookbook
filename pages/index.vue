@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import Slider from "../components/slider";
+import Slider from "~/components/slider";
 
 import { mapState, mapGetters } from "vuex";
 
@@ -16,7 +16,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      appLoaded: "isAppLoaded",
+      appLoaded: "isAppLoaded"
     })
   },
 

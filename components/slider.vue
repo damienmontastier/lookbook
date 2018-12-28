@@ -1,27 +1,24 @@
 <template>
-  <div id="slideshow">
-    <h1>coucou</h1>
-    <!-- <div id="slideshow__left"> -->
-    <!-- <imagetest></imagetest> -->
-    <!-- <h1>{{ slider[current].name }}</h1> -->
-    <!-- <img :src="slider[current].src.left[0]"> -->
+  <div class="slideshow">
+    <button style="position:absolute;right:5%; font-size:40px;color:white;" @click="next">+1 slide</button>
+
+    <div class="slideshow__left">
+      <h1>{{ this.appData.slider[this.current].text }}</h1>
+      <component :is="dynamicComponent"></component>
+    </div>
+    <div class="slideshow__right"></div>
   </div>
-  <!-- <div id="slideshow__right"> -->
-  <!-- <h1>{{ slider[current].text }}</h1> -->
-  <!-- <img :src="this.slider[current].src.right[0]"> -->
-  <!-- </div> -->
-  <!-- <button style="position:absolute;right:5%" @click="next">+</button> -->
-  <!-- </div> -->
 </template>
 
 <script>
-// import imagetest from "../components/image";
-
 import { mapState } from "vuex";
+import oneimage from "~/components/one-image";
+import twoimage from "~/components/two-image";
 
 export default {
   components: {
-    // imagetest,
+    oneimage,
+    twoimage
   },
   data() {
     return {
@@ -30,23 +27,37 @@ export default {
   },
   computed: {
     ...mapState({
-      datapp: data
-    })
+      appData: "appData"
+    }),
+    dynamicComponent() {
+      //Cette condition ne fonctionne pas, leftCount est undefined...
+      console.log(this.leftCount);
+      if (this.leftCount == 1) {
+        return "oneimage";
+      } else {
+        return "twoimage";
+      }
+    }
   },
   mounted() {
-    console.log(this.datapp);
+    this.left = this.appData.slider[this.current].src.left;
+    this.right = this.appData.slider[this.current].src.right;
+    this.leftCount = Object.keys(this.left).length;
+    this.rightCount = Object.keys(this.right).length;
+    console.log("LEFT COUNT IMG : ", this.leftCount);
+    console.log("RIGHT COUNT IMG : ", this.rightCount);
   },
   methods: {
-    // next() {
-    //   this.current++;
-    // }
+    next() {
+      this.current++;
+    }
   }
 };
 </script>
 
 
 <style lang="stylus" scoped>
-#slideshow {
+.slideshow {
   width: 100vw;
   height: 100vh;
   display: flex;

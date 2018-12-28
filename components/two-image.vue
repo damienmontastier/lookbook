@@ -1,5 +1,5 @@
 <template>
-  <h1>coucou</h1>
+  <h1>coucou two image</h1>
 </template>
 
 <script>

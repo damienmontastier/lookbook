@@ -1,6 +1,6 @@
 import Vuex from 'vuex'
 
-import appData from '../static/data/data.json'
+import appData from '~/static/data/data.json'
 
 const createStore = () => {
   return new Vuex.Store({
@@ -11,7 +11,7 @@ const createStore = () => {
     */
     state: {
       appLoaded: false,
-      data: appData
+      appData: appData
     },
 
     /* --
