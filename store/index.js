@@ -12,7 +12,7 @@ const createStore = () => {
     state: {
       appLoaded: false,
       appData: appData,
-      current: 0
+      current: 1
     },
 
     /* --
