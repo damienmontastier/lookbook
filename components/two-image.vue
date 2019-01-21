@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <img v-for="imgData in data" :src="imgData" alt="test">
+  <div class="two-image">
+    <img class="two-image__image" v-for="imgData in data" :src="imgData" alt="imgData">
   </div>
 </template>
 
@@ -22,9 +22,14 @@ export default {
 
 
 <style lang="stylus" scoped>
-img {
-  height: 40%;
-  width: 40%;
-  display: block;
+.two-image {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+
+  &__image {
+    width: auto;
+    height: 50vh;
+  }
 }
 </style>

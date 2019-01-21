@@ -6,12 +6,18 @@
     >slide n°{{ $store.state.current }}</button>
 
     <div class="slideshow__left">
-      <h1>{{ this.appData.slider[$store.state.current].text }}</h1>
-      <component :data="appData.slider[$store.state.current].src.left" :is="dynamicComponent"></component>
+      <h1 class="slideshow__left__name">{{ this.appData.slider[$store.state.current].text }}</h1>
+      <component
+        :data="appData.slider[$store.state.current].src.left"
+        :is="countImgLeft == 1 ? 'oneimage' : 'twoimage'"
+      ></component>
     </div>
     <div class="slideshow__right">
-      <h1>{{ appData.slider[$store.state.current].text }}</h1>
-      <component :data="appData.slider[$store.state.current].src.right" :is="dynamicComponent"></component>
+      <h1 class="slideshow__left__name">{{ appData.slider[$store.state.current].text }}</h1>
+      <component
+        :data="appData.slider[$store.state.current].src.right"
+        :is="countImgRight == 1 ? 'oneimage' : 'twoimage'"
+      ></component>
     </div>
   </div>
 </template>
@@ -33,21 +39,15 @@ export default {
     ...mapState({
       appData: "appData"
     }),
-    dynamicComponent() {
-      //Cette condition ne fonctionne pas, leftCount est undefined...
-      if (this.countImgLeft == 1) {
-        return "oneimage";
-      } else {
-        return "twoimage";
-      }
-    },
     countImgLeft() {
       this.left = this.appData.slider[this.$store.state.current].src.left;
-      return (this.leftCount = Object.keys(this.left).length);
+      return Object.keys(this.left).length;
+    },
+    countImgRight() {
+      this.right = this.appData.slider[this.$store.state.current].src.right;
+      return Object.keys(this.right).length;
     }
   },
-  created() {},
-  mounted() {},
   methods: {
     next() {
       this.$store.commit("increment");

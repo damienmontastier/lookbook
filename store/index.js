@@ -14,7 +14,6 @@ const createStore = () => {
       appData: appData,
       current: 1
     },
-
     /* --
 
     MUTATIONS
@@ -24,12 +23,12 @@ const createStore = () => {
       SET_APP_LOADED(state, bool) {
         state.appLoaded = bool
       },
+      // increment state for current slide
       increment(state) {
-        // mutate state
         state.current++
       },
+      // reset state when current slide is max
       reset(state) {
-        // mutate state
         state.current = 1
       }
     },

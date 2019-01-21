@@ -1,5 +1,7 @@
 <template>
-  <img :src="data[1]" alt="test">
+  <div class="one-image">
+    <img class="one-image__image" :src="data[1]" alt="test">
+  </div>
 </template>
 
 <script>
@@ -20,7 +22,15 @@ export default {
 
 
 <style lang="stylus" scoped>
-img {
-  height: 40%;
+.one-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+  &__image {
+    width: auto;
+    height: 50vh;
+  }
 }
 </style>
