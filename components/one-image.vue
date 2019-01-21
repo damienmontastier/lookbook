@@ -1,5 +1,5 @@
 <template>
-  <h1>coucou one image</h1>
+  <img :src="data[1]" alt="test">
 </template>
 
 <script>
@@ -7,11 +7,20 @@ export default {
   data() {
     return {};
   },
+  props: {
+    data: {
+      type: Object
+    }
+  },
   computed: {},
-  methods: {}
+  methods: {},
+  mounted() {}
 };
 </script>
 
 
 <style lang="stylus" scoped>
+img {
+  height: 40%;
+}
 </style>

@@ -1,5 +1,7 @@
 <template>
-  <h1>coucou two image</h1>
+  <div>
+    <img v-for="imgData in data" :src="imgData" alt="test">
+  </div>
 </template>
 
 <script>
@@ -7,11 +9,22 @@ export default {
   data() {
     return {};
   },
+  props: {
+    data: {
+      type: Object
+    }
+  },
   computed: {},
-  methods: {}
+  methods: {},
+  mounted() {}
 };
 </script>
 
 
 <style lang="stylus" scoped>
+img {
+  height: 40%;
+  width: 40%;
+  display: block;
+}
 </style>

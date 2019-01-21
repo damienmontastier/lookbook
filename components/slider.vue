@@ -1,14 +1,17 @@
 <template>
   <div class="slideshow">
-    <button style="position:absolute;right:5%; font-size:40px;color:white;" @click="next">+1 slide</button>
+    <button
+      style="position:absolute;right:5%; font-size:40px;color:white;"
+      @click="next"
+    >slide n°{{ $store.state.current }}</button>
 
     <div class="slideshow__left">
-      <h1>{{ this.appData.slider[this.$store.state.current].text }}</h1>
-      <component :is="dynamicComponent"></component>
+      <h1>{{ this.appData.slider[$store.state.current].text }}</h1>
+      <component :data="appData.slider[$store.state.current].src.left" :is="dynamicComponent"></component>
     </div>
     <div class="slideshow__right">
-      <h1>{{ this.appData.slider[this.$store.state.current].text }}</h1>
-      <!-- <component :is="dynamicComponent"></component> -->
+      <h1>{{ appData.slider[$store.state.current].text }}</h1>
+      <component :data="appData.slider[$store.state.current].src.right" :is="dynamicComponent"></component>
     </div>
   </div>
 </template>
@@ -32,46 +35,28 @@ export default {
     }),
     dynamicComponent() {
       //Cette condition ne fonctionne pas, leftCount est undefined...
-      switch (this.leftCount) {
-        case 1:
-          return "oneimage";
-          break;
-
-        case 2:
-          return "twoimage";
-          break;
-
-        default:
-          console.log("Il y a plus de 2 images, ou 0");
-          break;
+      if (this.countImgLeft == 1) {
+        return "oneimage";
+      } else {
+        return "twoimage";
       }
-      // if (this.leftCount == 1) {
-      //   return "oneimage";
-      // } else {
-      //   return "twoimage";
-      // }
+    },
+    countImgLeft() {
+      this.left = this.appData.slider[this.$store.state.current].src.left;
+      return (this.leftCount = Object.keys(this.left).length);
     }
   },
-  created() {
-    this.left = this.appData.slider[this.$store.state.current].src.left;
-    this.leftCount = Object.keys(this.left).length;
-    console.log(
-      "Number image on left : ",
-      this.leftCount,
-      ",  Current slide :  ",
-      this.$store.state.current
-    );
-  },
+  created() {},
+  mounted() {},
   methods: {
     next() {
-      this.$store.state.current++;
-      console.log(
-        "Number image on left : ",
-        this.leftCount,
-        ",  Current slide :  ",
-        this.$store.state.current
-      );
-      let leftbis = this.left;
+      this.$store.commit("increment");
+      if (
+        this.$store.state.current - 1 ==
+        Object.keys(this.appData.slider).length
+      ) {
+        this.$store.commit("reset");
+      }
     }
   }
 };

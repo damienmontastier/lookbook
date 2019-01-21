@@ -23,6 +23,14 @@ const createStore = () => {
     mutations: {
       SET_APP_LOADED(state, bool) {
         state.appLoaded = bool
+      },
+      increment(state) {
+        // mutate state
+        state.current++
+      },
+      reset(state) {
+        // mutate state
+        state.current = 1
       }
     },
 
