@@ -1,7 +1,5 @@
 <template>
   <div class="slideshow">
-    <h1 class="slideshow__right__name">{{ appData.slider[$store.state.current].text }}</h1>
-
     <button
       style="position:absolute;right:5%; font-size:40px;color:white;z-index:9999;"
       @click="next"
@@ -12,6 +10,7 @@
           :data="appData.slider[$store.state.current].src.left"
           :is="countImgLeft == 1 ? 'oneimage' : 'twoimage'"
         ></component>
+        <h1 class="slideshow__right__name">{{ appData.slider[$store.state.current].text }}</h1>
       </div>
     </div>
     <div class="slideshow__right">
@@ -90,12 +89,27 @@ export default {
 
   &__left, &__right {
     width: 50%;
+    position: relative;
 
     .slideshow__container {
       background-color: #e2dfd9;
       height: 100%;
       width: 100%;
       overflow: hidden;
+    }
+  }
+
+  &__left {
+    position: relative;
+
+    h1 {
+      position: absolute;
+      top: 10vh;
+      right: 0;
+      color: transparent;
+      transform: rotate(90deg);
+      -webkit-text-stroke-width: 2px;
+      -webkit-text-stroke-color: #fff;
     }
   }
 }
