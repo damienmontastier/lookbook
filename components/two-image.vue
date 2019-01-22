@@ -25,7 +25,10 @@ export default {
 .two-image {
   display: flex;
   justify-content: center;
-  align-content: center;
+  align-items: center;
+  height: 100%;
+  width: auto;
+  position: relative;
 
   &__image {
     width: auto;

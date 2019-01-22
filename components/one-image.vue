@@ -27,10 +27,17 @@ export default {
   justify-content: center;
   align-items: center;
   height: 100%;
+  width: auto;
+  position: relative;
 
   &__image {
     width: auto;
     height: 50vh;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    left: auto;
   }
 }
 </style>
