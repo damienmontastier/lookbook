@@ -5,21 +5,19 @@
       @click="next"
     >slide n°{{ $store.state.current }}</button>
     <div class="slideshow__left">
-      <div v-bind:style="{ float: floatDirection }" class="slideshow__container">
-        <component
-          :data="appData.slider[$store.state.current].src.left"
-          :is="countImgLeft == 1 ? 'oneimage' : 'twoimage'"
-        ></component>
-        <h1 class="slideshow__right__name">{{ appData.slider[$store.state.current].text }}</h1>
-      </div>
+      <div v-bind:style="{ left: floatDirection }" class="slideshow__container"></div>
+      <component
+        :data="appData.slider[$store.state.current].src.left"
+        :is="countImgLeft == 1 ? 'oneimage' : 'twoimage'"
+      ></component>
+      <h1 class="slideshow__right__name">{{ appData.slider[$store.state.current].text }}</h1>
     </div>
     <div class="slideshow__right">
-      <div v-bind:style="{ float: floatDirection }" class="slideshow__container">
-        <component
-          :data="appData.slider[$store.state.current].src.right"
-          :is="countImgRight == 1 ? 'oneimage' : 'twoimage'"
-        ></component>
-      </div>
+      <div v-bind:style="{ left: floatDirection }" class="slideshow__container"></div>
+      <component
+        :data="appData.slider[$store.state.current].src.right"
+        :is="countImgRight == 1 ? 'oneimage' : 'twoimage'"
+      ></component>
     </div>
   </div>
 </template>
@@ -37,7 +35,7 @@ export default {
   },
   data() {
     return {
-      floatDirection: ""
+      floatDirection: "none"
     };
   },
   computed: {
@@ -55,8 +53,9 @@ export default {
   },
   methods: {
     next() {
-      TweenMax.to(".slideshow__container", 1, {
-        width: "0%",
+      TweenMax.to(".slideshow__container", 1.2, {
+        width: "100%",
+        ease: Expo.easeIn,
         onCompleteScope: this,
         onComplete: () => {
           this.$store.commit("increment");
@@ -66,9 +65,10 @@ export default {
           ) {
             this.$store.commit("reset");
           }
-          this.floatDirection = "right";
-          TweenMax.to(".slideshow__container", 1, {
-            width: "100%",
+          this.floatDirection = 0;
+          TweenMax.to(".slideshow__container", 1.2, {
+            width: "0%",
+            ease: Expo.easeOut,
             onComplete: () => {}
           });
         }
@@ -90,21 +90,24 @@ export default {
   &__left, &__right {
     width: 50%;
     position: relative;
+    background-color: #e2dfd9;
 
     .slideshow__container {
-      background-color: #e2dfd9;
+      background-color: white;
       height: 100%;
-      width: 100%;
+      width: 0;
       overflow: hidden;
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 10;
     }
   }
 
   &__left {
-    position: relative;
-
     h1 {
       position: absolute;
-      top: 10vh;
+      top: 10%;
       right: 0;
       color: transparent;
       transform: rotate(90deg);

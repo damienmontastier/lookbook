@@ -33,7 +33,6 @@ export default {
   &__image {
     width: auto;
     height: 50vh;
-    position: absolute;
   }
 }
 </style>
