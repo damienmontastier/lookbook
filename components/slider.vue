@@ -7,6 +7,7 @@
     <div class="slideshow__left">
       <div v-bind:style="{ left: floatDirection }" class="slideshow__container"></div>
       <component
+        :widthTween="tweenedWidth"
         :data="appData.slider[$store.state.current].src.left"
         :is="countImgLeft == 1 ? 'oneimage' : 'twoimage'"
       ></component>
@@ -15,6 +16,7 @@
     <div class="slideshow__right">
       <div v-bind:style="{ left: floatDirection }" class="slideshow__container"></div>
       <component
+        :widthTween="tweenedWidth"
         :data="appData.slider[$store.state.current].src.right"
         :is="countImgRight == 1 ? 'oneimage' : 'twoimage'"
       ></component>
@@ -35,7 +37,8 @@ export default {
   },
   data() {
     return {
-      floatDirection: "none"
+      floatDirection: "none",
+      tweenedWidth: 100
     };
   },
   computed: {
@@ -58,6 +61,7 @@ export default {
         ease: Expo.easeIn,
         onCompleteScope: this,
         onComplete: () => {
+          this.tweenedWidth = 0;
           this.$store.commit("increment");
           if (
             this.$store.state.current - 1 ==
@@ -66,10 +70,14 @@ export default {
             this.$store.commit("reset");
           }
           this.floatDirection = 0;
-          TweenMax.to(".slideshow__container", 1.2, {
-            width: "0%",
+          TweenMax.to(".slideshow__container", 1.5, {
+            width: 0,
             ease: Expo.easeOut,
             onComplete: () => {}
+          });
+          TweenMax.to(this, 1.8, {
+            tweenedWidth: 100,
+            ease: Expo.easeOut
           });
         }
       });

@@ -5,24 +5,34 @@
       "text": "Winter",
       "src": {
         "left": {
-          "1": "https://images.unsplash.com/photo-1545605933-7e131ba8bbd3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80",
-          "2": "https://images.unsplash.com/photo-1545605933-7e131ba8bbd3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80"
+          "1": "./images/image1.jpg"
         },
         "right": {
-          "1": "https://images.unsplash.com/photo-1545562006-90f5b75a9a3d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=752&q=80"
+          "1": "./images/image3.jpg"
         }
       }
     },
     "2": {
       "id": 2,
+      "text": "Spring",
+      "src": {
+        "left": {
+          "1": "./images/image4.jpg"
+        },
+        "right": {
+          "1": "./images/image5.jpg"
+        }
+      }
+    },
+    "3": {
+      "id": 3,
       "text": "Summer",
       "src": {
         "left": {
-          "1": "https://images.unsplash.com/photo-1545586159-c94898432e02?ixlib=rb-1.2.1&auto=format&fit=crop&w=2426&q=80"
+          "1": "./images/image7.jpg"
         },
         "right": {
-          "1": "https://images.unsplash.com/photo-1545564173-a9fa60e854e4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
-          "2": "https://images.unsplash.com/photo-1545564173-a9fa60e854e4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+          "1": "./images/image8.jpg"
         }
       }
     }

@@ -1,6 +1,12 @@
 <template>
   <div class="two-image">
-    <img class="two-image__image" v-for="imgData in data" :src="imgData" alt="imgData">
+    <img
+      ref="twoimage"
+      class="two-image__image"
+      v-for="imgData in data"
+      :src="imgData"
+      alt="imgData"
+    >
   </div>
 </template>
 
@@ -16,7 +22,23 @@ export default {
   },
   computed: {},
   methods: {},
-  mounted() {}
+  mounted() {
+    //faire boucle for pour récupèrer les size  des deux images
+    let imgs = this.$refs.twoimage;
+    let objectImage = {};
+    for (let a = 0; a < imgs.length; a++) {
+      let width = imgs[a].width;
+      let height = imgs[a].height;
+      console.log("imgs ", a, " ", imgs);
+      console.log("height img : ", height);
+      objectImage = {
+        id: a,
+        width: width,
+        height: height
+      };
+    }
+    // console.log(objectImage);
+  }
 };
 </script>
 
@@ -31,8 +53,7 @@ export default {
   position: relative;
 
   &__image {
-    width: auto;
-    height: 50vh;
+    width: 20%;
   }
 }
 </style>
