@@ -26,6 +26,17 @@ const createStore = () => {
       // increment state for current slide
       increment(state) {
         state.current++
+
+        if (state.current - 1 == Object.keys(appData.slider).length) {
+          state.current = 1
+        }
+      },
+      decrement(state) {
+        state.current--
+
+        if (state.current == 0) {
+          state.current = Object.keys(appData.slider).length
+        }
       },
       // reset state when current slide is max
       reset(state) {

@@ -36,5 +36,9 @@
         }
       }
     }
+  },
+  "config": {
+    "rightArrow": "./icons/arrow-right.png",
+    "leftArrow": "./icons/arrow-left.png"
   }
 }

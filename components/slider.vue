@@ -1,25 +1,33 @@
 <template>
   <div class="slideshow">
-    <button
-      style="position:absolute;right:5%; font-size:40px;color:white;z-index:9999;"
-      @click="next"
-    >slide n°{{ $store.state.current }}</button>
+    <!-- <button
+      @click="previous"
+      style="position:absolute;right:5%; font-size:40px;color:white;z-index:1;"
+    >slide n°{{ $store.state.current }}</button>-->
     <div class="slideshow__left">
-      <div v-bind:style="{ left: floatDirection }" class="slideshow__container"></div>
+      <div :class="[putOnLeft ? 'classLeft' : 'classRight']" class="slideshow__container"></div>
       <component
         :widthTween="tweenedWidth"
         :data="appData.slider[$store.state.current].src.left"
         :is="countImgLeft == 1 ? 'oneimage' : 'twoimage'"
       ></component>
-      <h1 class="slideshow__right__name">{{ appData.slider[$store.state.current].text }}</h1>
+      <h1 class="slideshow__left__name">{{ appData.slider[$store.state.current].text }}</h1>
     </div>
+
     <div class="slideshow__right">
-      <div v-bind:style="{ left: floatDirection }" class="slideshow__container"></div>
+      <h1 @click="previous">Back</h1>
+      <div :class="[putOnLeft ? 'classLeft' : 'classRight']" class="slideshow__container"></div>
       <component
         :widthTween="tweenedWidth"
         :data="appData.slider[$store.state.current].src.right"
         :is="countImgRight == 1 ? 'oneimage' : 'twoimage'"
       ></component>
+      <img
+        @click="next"
+        class="slideshow__right__arrowRightImg"
+        :src="appData.config.rightArrow"
+        alt="right-arrow"
+      >
     </div>
   </div>
 </template>
@@ -37,8 +45,10 @@ export default {
   },
   data() {
     return {
-      floatDirection: "none",
-      tweenedWidth: 100
+      floatValue: "",
+      tweenedWidth: 100,
+      putOnRight: false,
+      putOnLeft: false
     };
   },
   computed: {
@@ -56,24 +66,18 @@ export default {
   },
   methods: {
     next() {
+      this.putOnLeft = false;
       TweenMax.to(".slideshow__container", 1.2, {
         width: "100%",
         ease: Expo.easeIn,
         onCompleteScope: this,
         onComplete: () => {
+          this.putOnLeft = true;
           this.tweenedWidth = 0;
           this.$store.commit("increment");
-          if (
-            this.$store.state.current - 1 ==
-            Object.keys(this.appData.slider).length
-          ) {
-            this.$store.commit("reset");
-          }
-          this.floatDirection = 0;
           TweenMax.to(".slideshow__container", 1.5, {
             width: 0,
-            ease: Expo.easeOut,
-            onComplete: () => {}
+            ease: Expo.easeOut
           });
           TweenMax.to(this, 1.8, {
             tweenedWidth: 100,
@@ -81,7 +85,23 @@ export default {
           });
         }
       });
-      this.floatDirection = "";
+    },
+    previous() {
+      this.putOnLeft = true;
+      TweenMax.to(".slideshow__container", 1.2, {
+        width: "100%",
+        ease: Expo.easeIn,
+        onCompleteScope: this,
+        onComplete: () => {
+          this.putOnLeft = false;
+          this.tweenedWidth = 100;
+          this.$store.commit("decrement");
+          TweenMax.to(".slideshow__container", 1.5, {
+            width: 0,
+            ease: Expo.easeOut
+          });
+        }
+      });
     }
   }
 };
@@ -100,6 +120,14 @@ export default {
     position: relative;
     background-color: #e2dfd9;
 
+    .classLeft {
+      left: 0;
+    }
+
+    .classRight {
+      right: 0;
+    }
+
     .slideshow__container {
       background-color: white;
       height: 100%;
@@ -107,13 +135,12 @@ export default {
       overflow: hidden;
       position: absolute;
       top: 0;
-      right: 0;
-      z-index: 10;
+      z-index: 2;
     }
   }
 
   &__left {
-    h1 {
+    h1&__name {
       position: absolute;
       top: 10%;
       right: 0;
@@ -121,6 +148,25 @@ export default {
       transform: rotate(90deg);
       -webkit-text-stroke-width: 2px;
       -webkit-text-stroke-color: #fff;
+    }
+  }
+
+  &__right {
+    &__arrowRightImg {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 30px;
+      z-index: 3;
+      height: 25px;
+      width: 25px;
+    }
+
+    h1 {
+      position: absolute;
+      top: 10px;
+      left: 30px;
+      z-index: 4;
     }
   }
 }
