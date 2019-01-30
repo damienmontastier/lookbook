@@ -1,12 +1,9 @@
 <template>
-  <div class="slideshow">
-    <!-- <button
-      @click="previous"
-      style="position:absolute;right:5%; font-size:40px;color:white;z-index:1;"
-    >slide n°{{ $store.state.current }}</button>-->
+  <div @mousemove="mouseMove" class="slideshow">
     <div class="slideshow__left">
       <div :class="[putOnLeft ? 'classLeft' : 'classRight']" class="slideshow__container"></div>
       <component
+        :mousePosition="mousePosition"
         :widthTween="tweenedWidth"
         :data="appData.slider[$store.state.current].src.left"
         :is="countImgLeft == 1 ? 'oneimage' : 'twoimage'"
@@ -15,7 +12,9 @@
     </div>
 
     <div class="slideshow__right">
-      <h1 @click="previous">Back</h1>
+      <p class="slideshow__right__back" @click="previous">
+        <img @click="next" :src="appData.config.leftArrow" alt="left-arrow">Back
+      </p>
       <div :class="[putOnLeft ? 'classLeft' : 'classRight']" class="slideshow__container"></div>
       <component
         :widthTween="tweenedWidth"
@@ -48,7 +47,8 @@ export default {
       floatValue: "",
       tweenedWidth: 100,
       putOnRight: false,
-      putOnLeft: false
+      putOnLeft: false,
+      mousePosition: {}
     };
   },
   computed: {
@@ -65,6 +65,12 @@ export default {
     }
   },
   methods: {
+    mouseMove(e) {
+      this.mousePosition = {
+        x: e.clientX,
+        y: e.clientY
+      };
+    },
     next() {
       this.putOnLeft = false;
       TweenMax.to(".slideshow__container", 1.2, {
@@ -162,11 +168,19 @@ export default {
       width: 25px;
     }
 
-    h1 {
+    p&__back {
       position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       top: 10px;
       left: 30px;
       z-index: 4;
+
+      & img {
+        height: 20px;
+        width: 20px;
+      }
     }
   }
 }
