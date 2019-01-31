@@ -6,7 +6,7 @@
         class="one-image__container__image"
         :style="{width : widthTween+'%'}"
         :src="data[1]"
-        alt="test"
+        alt="one-image"
       >
     </div>
   </div>
@@ -31,14 +31,17 @@ export default {
   },
   methods: {
     getMousePosition(mousePosition) {
-      console.log(mousePosition.x);
-      console.log(mousePosition.y);
-    }
+      console.log("mousePosition.x component", mousePosition.x);
+      console.log("mousePosition.y component", mousePosition.y);
+    },
+    calcDistance() {}
   },
   mounted() {
     let img = this.$refs.oneimage;
-    
-    console.log(img.getAttribute("scrollHeight"));
+
+    let imgProperty = img.getBoundingClientRect();
+
+    console.log(img);
   },
   watch: {
     //Update la position du props : mousePosition
@@ -61,8 +64,8 @@ export default {
   &__container {
     position: relative;
     overflow: hidden;
-    height: 500px;
-    width: 50%;
+    height: 80vh;
+    width: 25vw;
 
     &__image {
       object-fit: cover;

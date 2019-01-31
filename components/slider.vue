@@ -1,6 +1,11 @@
 <template>
-  <div @mousemove="mouseMove" class="slideshow">
+  <div @mousemove="getMouseMove" class="slideshow">
     <div class="slideshow__left">
+      <h1 class="slideshow__left__nameSlide">{{ appData.slider[$store.state.current].text }}</h1>
+      <p class="slideshow__left__logo">OTB</p>
+      <p
+        class="slideshow__left__currentSlide"
+      >{{ appData.slider[$store.state.current].id }} | {{ Object.keys(appData.slider).length }}</p>
       <div :class="[putOnLeft ? 'classLeft' : 'classRight']" class="slideshow__container"></div>
       <component
         :mousePosition="mousePosition"
@@ -8,12 +13,11 @@
         :data="appData.slider[$store.state.current].src.left"
         :is="countImgLeft == 1 ? 'oneimage' : 'twoimage'"
       ></component>
-      <h1 class="slideshow__left__name">{{ appData.slider[$store.state.current].text }}</h1>
     </div>
 
     <div class="slideshow__right">
       <p class="slideshow__right__back" @click="previous">
-        <img @click="next" :src="appData.config.leftArrow" alt="left-arrow">Back
+        <img @click="previous" :src="appData.config.leftArrow" alt="left-arrow">Back
       </p>
       <div :class="[putOnLeft ? 'classLeft' : 'classRight']" class="slideshow__container"></div>
       <component
@@ -48,7 +52,7 @@ export default {
       tweenedWidth: 100,
       putOnRight: false,
       putOnLeft: false,
-      mousePosition: {}
+      mousePosition: { x: 0, y: 0 }
     };
   },
   computed: {
@@ -65,13 +69,14 @@ export default {
     }
   },
   methods: {
-    mouseMove(e) {
+    getMouseMove(e) {
       this.mousePosition = {
         x: e.clientX,
         y: e.clientY
       };
     },
     next() {
+      console.log("next");
       this.putOnLeft = false;
       TweenMax.to(".slideshow__container", 1.2, {
         width: "100%",
@@ -122,9 +127,11 @@ export default {
   flex-direction: row;
 
   &__left, &__right {
-    width: 50%;
+    width: 50vw;
     position: relative;
     background-color: #e2dfd9;
+    padding: 0;
+    margin: 0;
 
     .classLeft {
       left: 0;
@@ -146,12 +153,32 @@ export default {
   }
 
   &__left {
-    h1&__name {
+    border-right: 1px solid #a8a49f;
+
+    p&__logo {
       position: absolute;
-      top: 10%;
+      top: 20px;
+      left: 20px;
+      z-index: 6;
+      font-weight: 900;
+    }
+
+    p&__currentSlide {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 20px;
+      z-index: 5;
+      color: #a8a49f;
+    }
+
+    h1&__nameSlide {
+      position: absolute;
+      top: calc(10vh + 100px);
       right: 0;
+      font-size: 6em;
       color: transparent;
-      transform: rotate(90deg);
+      transform: translateX(50%) rotate(-90deg) translateY(-65%);
       -webkit-text-stroke-width: 2px;
       -webkit-text-stroke-color: #fff;
     }
@@ -162,7 +189,7 @@ export default {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      right: 30px;
+      right: 20px;
       z-index: 3;
       height: 25px;
       width: 25px;
@@ -173,13 +200,15 @@ export default {
       display: flex;
       justify-content: center;
       align-items: center;
-      top: 10px;
-      left: 30px;
+      top: 20px;
+      left: 20px;
       z-index: 4;
+      color: #a8a49f;
 
       & img {
         height: 20px;
         width: 20px;
+        margin-right: 10px;
       }
     }
   }
