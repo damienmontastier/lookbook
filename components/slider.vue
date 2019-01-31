@@ -127,11 +127,9 @@ export default {
   flex-direction: row;
 
   &__left, &__right {
-    width: 50vw;
+    width: 50%;
     position: relative;
     background-color: #e2dfd9;
-    padding: 0;
-    margin: 0;
 
     .classLeft {
       left: 0;
