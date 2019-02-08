@@ -57,13 +57,13 @@ export default {
     position: relative;
     overflow: hidden;
     height: 500px;
-    width: 50%;
+    width: 320px;
 
     &__image {
       overflow: hidden;
       object-fit: cover;
       width: 100%;
-      height: 500px;
+      height: 100%;
       position: absolute;
       right: 0;
     }
