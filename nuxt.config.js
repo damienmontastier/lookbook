@@ -11,7 +11,7 @@ module.exports = {
     htmlAttrs: {
       lang: 'fr',
     },
-    title: 'Starter',
+    title: 'Lookbook',
     meta: [{
         charset: 'utf-8'
       },
@@ -22,7 +22,7 @@ module.exports = {
       {
         hid: 'description',
         name: 'description',
-        content: "Starter build with nuxt.js"
+        content: "Test on nuxt.js by developing a slider inspired by a shot of Dribbble."
       },
       {
         name: 'theme-color',
@@ -39,7 +39,7 @@ module.exports = {
       {
         hid: `og:title`,
         property: 'og:title',
-        content: 'Starter'
+        content: 'Lookboo'
       },
       {
         hid: 'og:type',
@@ -49,12 +49,12 @@ module.exports = {
       {
         hid: 'og:description',
         property: 'og:description',
-        content: "Starter build with nuxt.js"
+        content: "Test on nuxt.js by developing a slider inspired by a shot of Dribbble."
       },
       {
         hid: 'og:site_name',
         property: 'og:site_name',
-        content: 'Starter'
+        content: 'Lookbook'
       },
       {
         hid: 'og:url',
@@ -84,12 +84,12 @@ module.exports = {
       {
         hid: 'twitter:title',
         property: 'twitter:title',
-        content: 'Starter'
+        content: 'Lookbook'
       },
       {
         hid: 'twitter:description',
         property: 'twitter:description',
-        content: "Starter build with nuxt.js"
+        content: "Test on nuxt.js by developing a slider inspired by a shot of Dribbble."
       },
       {
         hid: 'twitter:site',

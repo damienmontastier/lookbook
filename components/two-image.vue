@@ -44,6 +44,8 @@ export default {
 
 
 <style lang="stylus" scoped>
+
+
 .two-image {
   display: flex;
   justify-content: center;
