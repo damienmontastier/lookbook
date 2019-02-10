@@ -1,5 +1,5 @@
 # Lookbook
-![preview of slider](https://i.giphy.com/media/vN3pY8mh8RvUicse73/source.gif)
+![](https://i.giphy.com/media/vN3pY8mh8RvUicse73/source.gif)
 
 ## Create files and folders
 
